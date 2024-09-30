@@ -8,3 +8,12 @@ services:
     volumes:
       - ./logs:/var/log/
       - ./fluent.conf:/fluentd/etc/fluent.conf
+  fluentd-es:
+    container_name: fluentd-es
+    image: truongnhan0311/ilogis:newrelic-fluentd-docker-es
+    ports:
+      - "25225:24224"
+    restart: always
+    volumes:
+      - ./logs:/var/log/
+      - ./fluent.conf:/fluentd/etc/fluent.conf
