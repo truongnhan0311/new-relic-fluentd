@@ -1,14 +1,13 @@
-FROM fluent/fluentd:v1.12.0-1.0
-
-
+FROM fluent/fluentd:v1.17-1
 USER root
 
-RUN apk add --no-cache --update --virtual .build-deps \
-        sudo build-base ruby-dev \
- && sudo gem install fluent-plugin-elasticsearch \
- && sudo gem sources --clear-all \
- && apk del .build-deps \
- && rm -rf /home/fluent/.gem/ruby/*/cache/*.gem
+RUN apk add --no-cache --update --virtual .build-deps  sudo build-base ruby-dev
+RUN sudo gem install faraday -v 2.8.1
+RUN sudo gem install faraday-net_http -v 3.0.2
+RUN sudo gem install fluent-plugin-elasticsearch -v 5.0.3
+RUN sudo gem sources --clear-all
+RUN apk del .build-deps
+RUN rm -rf /home/fluent/.gem/ruby/*/cache/*.gem
 
 COPY fluent.es.conf  /fluentd/etc/fluent.conf
 COPY entrypoint.sh /bin/
