@@ -16,4 +16,4 @@ services:
     restart: always
     volumes:
       - ./logs:/var/log/
-      - ./fluent.conf:/fluentd/etc/fluent.conf
+      - ./fluent.es.conf:/fluentd/etc/fluent.conf
